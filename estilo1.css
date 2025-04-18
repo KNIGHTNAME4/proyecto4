@@ -1,5 +1,8 @@
     body{
-        text-align:center}
+        text-align:center
+        background-color: plum;
+    
+    }
     h1{ text-align: center ;
         font-size: 48px;
         font-weight: 900;
