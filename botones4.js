@@ -1,10 +1,8 @@
-alert("hola mundo");
+alert("bienvenido");
 
 let boton = document.getElementById("p2");
 
 function botones(){
-
-
     alert("quien eres?");
 
 }
