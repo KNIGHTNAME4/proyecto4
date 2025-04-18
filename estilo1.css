@@ -1,10 +1,12 @@
 
-     h1{ text-align: center ;
+    h1{ text-align: center ;
         font-size: 48px;
         font-weight: 900;
         color: blueviolet;
+
     }
-   div{
+    
+   #bancos{
        
        margin:20px 80px;
       background-color: purple;
@@ -22,7 +24,7 @@
 
 
 
-   div button{
+   #bancos .cambio{
        text-align: center;
       
      margin:10px 30px 10px 100px;
@@ -36,17 +38,17 @@
  animation-name: movedan;
      animation-duration:s;
    }
-  div button:hover{
+  .cambio:hover{
       background-color:yellow;
        color: green;
        transform: translate(5px);
      transform: scale(1.5);
      width: 40%;
    }
-  div button:active{
+  .cambio:active{
        color:red;
        background-color: pink;
-       width: 90%;
+       width: 40%;
    }
 
 a:hover{
@@ -79,4 +81,46 @@ a:hover{
 animation-name: restmover;
 animation-duration: 6s;
 }
+
+
+
+.mensajeoculto{
+    display: none;
+    top: 20%;left: 20%;
+   position: fixed;
+  width: 100vh; height: 100vh;
+  background: greenyellow;
+  
+    border: 3px solid black;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+
+}
+.contento1{
+    background: white;
+    text-align: center;
+    border-radius: 10px;
+     padding: 20px;
+}
+.contento2{
+    background: aqua;
+    text-align: center;
+    border-radius: 10px;
+     padding: 20px;
+}
+
+
+#emer{
+  
+     padding: 15px;
+}
+
+ #okey2{
+     display: inline-block;
+     background-color: antiquewhite;
+     
+ }
+
+
 
