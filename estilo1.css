@@ -1,0 +1,81 @@
+body 
+{
+
+    
+   div{
+       
+       margin:20px 80px;
+      background-color: purple;
+     box-shadow: 2px 2px whitesmoke;
+     border-radius:30px
+    
+   }	
+
+  @keyframes movedan{
+    from {border:1px solid;}
+    
+       to {border :10px solid;}
+
+  }
+
+
+
+   div button{
+       text-align: center;
+      
+     margin:10px 30px 10px 100px;
+     border-radius: 20px;
+     background-color: orange;
+     box-shadow: 2px 2px whitesmoke;
+    
+    width: 40%;
+     transition: transform 5s, width 3s;
+
+ animation-name: movedan;
+     animation-duration:s;
+   }
+  div button:hover{
+      background-color:yellow;
+       color: green;
+       transform: translate(5px);
+     transform: scale(1.5);
+     width: 40%;
+   }
+  div button:active{
+       color:red;
+       background-color: pink;
+       width: 40%;
+   }
+
+a:hover{
+      text-decoration: underline;
+       color: blueviolet;
+   }
+   a:active{
+       color:red;
+       background-color: pink;
+   }
+
+#p2{
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    background-color: palevioletred;
+    color:powderblue;
+
+}
+
+
+@keyframes  restmover{
+      0% {color:red;}
+      50% {color:powderblue;}
+      100% { color: green;}
+
+}
+#anima{
+    font-size: 30px;
+animation-name: restmover;
+animation-duration: 6s;
+}
+
+}
