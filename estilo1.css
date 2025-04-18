@@ -1,10 +1,8 @@
 
-
      h1{ text-align: center ;
         font-size: 48px;
         font-weight: 900;
         color: blueviolet;
-        
     }
    div{
        
@@ -48,7 +46,7 @@
   div button:active{
        color:red;
        background-color: pink;
-       width: 40%;
+       width: 90%;
    }
 
 a:hover{
