@@ -1,4 +1,13 @@
-    body{
+header{
+      text-align: center;
+     background-color: rgb(97, 47, 97);
+     line-height: 20%;
+     padding: 1%;
+
+  }
+
+
+body{
         text-align:center;
         background-color: plum;
     
