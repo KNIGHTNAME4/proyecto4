@@ -32,11 +32,14 @@
        text-align: center;
       
      margin:10px 30px 10px 100px;
-     border-radius: 20px;
+   
      background-color: orange;
      box-shadow: 2px 2px whitesmoke;
-    
     width: 40%;
+    height: 10%;
+   border-radius: 20%;
+    font-size: 120%;
+ 
      transition: transform 5s, width 3s;
 
  animation-name: movedan;
@@ -73,6 +76,7 @@ a:hover{
       width: 40%;
     height: 10%;
    border-radius: 20%;
+    font-size: 120%;
 }
 
 
