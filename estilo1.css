@@ -28,7 +28,8 @@
 
   body{
      text-align: center;
-     background-color: plum;
+     background: #3F5EFB;
+background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 71, 107, 0.66) 100%);
   }
 
    h1{ text-align: center ;
