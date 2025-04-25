@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,7 +20,7 @@
     header {
       background-color: #c0392b;
       color: white;
-      padding: 20px 60px 20px 60px;
+      padding: 20px 60px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -32,9 +33,10 @@
       font-weight: bold;
       letter-spacing: 3px;
       text-align: center;
+      transition: opacity 0.5s ease;
     }
 
-    /* ----- Botón hamburguesa en header ----- */
+    /* ----- Botón hamburguesa ----- */
     .hamburguesa {
       position: absolute;
       left: 20px;
@@ -67,10 +69,10 @@
       transform: rotate(-45deg) translate(5px, -5px);
     }
 
-    /* ----- Menú lateral desplegable ----- */
+    /* ----- Menú lateral ----- */
     .menu-lateral {
       position: fixed;
-      top: 80px; /* Justo debajo del header */
+      top: 80px;
       left: -250px;
       width: 250px;
       height: calc(100% - 80px);
@@ -111,115 +113,125 @@
       display: block;
     }
 
-    /* ----- Navegación interna ----- */
-    nav {
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      background-color: #b23527;
-      padding: 10px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    nav a:hover,
-    nav a.menu-seleccionado {
-      color: #ecf0f1;
-      border-bottom: 2px solid white;
-    }
-
     /* ----- Contenido dinámico ----- */
     .contenido {
-      padding: 30px;
+      padding: 40px;
       display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
     }
 
     .contenido.activo {
       display: block;
-      animation: fadeIn 0.5s ease-in;
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Fondo para secciones distintas */
+    #inicio {
+      background: url('https://images.unsplash.com/photo-1616707423181-69f86b3fcbcb') center/cover;
+      color: white;
+      min-height: 400px;
+    }
+
+    #planetas {
+      background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      min-height: 400px;
+    }
+
+    #secretos {
+      background: black;
+      color: lime;
+      min-height: 400px;
+    }
+
+    #fundadores {
+      background: #7f8c8d;
+      color: white;
+      min-height: 400px;
+    }
+
+    #militar {
+      background: #2c3e50;
+      color: gold;
+      min-height: 400px;
     }
   </style>
 </head>
 <body>
 
-<!-- Header y botón hamburguesa en la misma barra -->
 <header>
   <div class="hamburguesa" onclick="toggleMenu()">
     <span></span>
     <span></span>
     <span></span>
   </div>
-  <div class="logo">AUGE</div>
+  <div class="logo" id="logo">AUGE</div>
 </header>
 
-<!-- Menú Lateral -->
 <div class="menu-lateral" id="menu">
-  <a href="#">Inicio</a>
-  <a href="#">Información de la Empresa</a>
-  <a href="#">Sistemas Solares</a>
-  <a href="#">Planes</a>
-  <a href="#">Fundadores</a>
-  <a href="#">Categoría Militar</a>
-  <a href="#">Secretos</a>
+  <a href="#" onclick="mostrarSeccion('inicio')">Inicio</a>
+  <a href="#" onclick="mostrarSeccion('planetas')">Sistemas Solares</a>
+  <a href="#" onclick="mostrarSeccion('fundadores')">Fundadores</a>
+  <a href="#" onclick="mostrarSeccion('militar')">Categoría Militar</a>
+  <a href="#" onclick="mostrarSeccion('secretos')">Secretos</a>
 </div>
 
 <div class="overlay" onclick="toggleMenu()"></div>
 
-<!-- Navegación de secciones dinámicas -->
-<nav>
-  <a href="#" onclick="mostrarSeccion('nosotros', this)">Nosotros</a>
-  <a href="#" onclick="mostrarSeccion('recursos', this)">Recursos</a>
-  <a href="#" onclick="mostrarSeccion('productos', this)">Productos</a>
-  <a href="#" onclick="mostrarSeccion('ahora', this)">Ahora</a>
-</nav>
-
-<!-- Contenido dinámico -->
-<div class="contenido" id="nosotros">
-  <h2>¿Quiénes somos?</h2>
-  <p>AUGE es una corporación de élite, impulsando el futuro con poder, tecnología y visión imparable.</p>
+<!-- Secciones -->
+<div class="contenido activo" id="inicio">
+  <h1>Bienvenido a AUGE</h1>
+  <p>Dominamos la energía. Controlamos los secretos. Reinventamos el futuro.</p>
 </div>
 
-<div class="contenido" id="recursos">
-  <h2>Recursos Estratégicos</h2>
-  <p>Contamos con bases, energía avanzada y control total sobre zonas clave en el sistema.</p>
+<div class="contenido" id="planetas">
+  <h1>Sistemas Solares</h1>
+  <p>Colonias activas en Alfa Centauri, Vega y más. Energía infinita en manos humanas.</p>
 </div>
 
-<div class="contenido" id="productos">
-  <h2>Productos de Dominio</h2>
-  <p>Desde tecnología militar hasta sistemas solares autónomos, AUGE lidera la innovación.</p>
+<div class="contenido" id="fundadores">
+  <h1>Los Fundadores</h1>
+  <p>Ellos forjaron la visión. Científicos, estrategas y visionarios detrás del imperio AUGE.</p>
 </div>
 
-<div class="contenido" id="ahora">
-  <h2>Lo que sucede ahora</h2>
-  <p>AUGE está activando el Proyecto Fénix. Prepárate para el próximo salto de la humanidad.</p>
+<div class="contenido" id="militar">
+  <h1>Fuerza Militar</h1>
+  <p>Élite entrenada, mecas de combate y sistemas autónomos protegen el legado AUGE.</p>
 </div>
 
-<!-- Script -->
+<div class="contenido" id="secretos">
+  <h1>Archivos Clasificados</h1>
+  <p>Acceso restringido. Información disponible solo para niveles superiores.</p>
+</div>
+
 <script>
   function toggleMenu() {
     document.body.classList.toggle('activo');
   }
 
-  function mostrarSeccion(id, link) {
-    document.querySelectorAll('.contenido').forEach(el => el.classList.remove('activo'));
-    document.getElementById(id).classList.add('activo');
-    document.querySelectorAll('nav a').forEach(a => a.classList.remove('menu-seleccionado'));
-    link.classList.add('menu-seleccionado');
-  }
+  function mostrarSeccion(id) {
+    // Cerrar menú
+    document.body.classList.remove('activo');
 
-  // Mostrar sección por defecto
-  mostrarSeccion('nosotros', document.querySelector('nav a'));
+    // Ocultar todas
+    document.querySelectorAll('.contenido').forEach(s => {
+      s.classList.remove('activo');
+    });
+
+    // Mostrar sección actual
+    document.getElementById(id).classList.add('activo');
+
+    // Mostrar u ocultar el logo principal
+    const logo = document.getElementById('logo');
+    if (id === 'inicio') {
+      logo.style.opacity = 1;
+    } else {
+      logo.style.opacity = 0;
+    }
+  }
 </script>
 
 </body>
