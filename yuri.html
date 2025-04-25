@@ -1,323 +1,220 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>AUGE - Poder y Futuro</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfa Centauri</title>
+    <style>
+        /* Reset de márgenes */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100%;
+            background-color: #1e1e1e;
+            color: white;
+            overflow-x: hidden; /* Evita el desbordamiento horizontal */
+        }
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f4f4;
-    }
+        /* Estilos de la cabecera */
+        #menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #2c3e50;
+            width: 100%;
+            padding: 15px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    /* ----- Pantalla de advertencia (inicial) ----- */
-    #advertencia {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      color: white;
-      font-size: 18px;
-      text-align: center;
-      display: block;
-      opacity: 1;
-      transition: opacity 1s ease;
-    }
+        /* Título Alfa Centauri */
+        #titulo {
+            font-size: 30px;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
 
-    #advertencia .contenedor {
-      background: #e74c3c;
-      padding: 30px;
-      border-radius: 15px;
-      width: 80%;
-      max-width: 400px;
-    }
+        #titulo:hover {
+            color: #e74c3c;
+        }
 
-    #advertencia h1 {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
+        /* Estilos del menú */
+        #menuToggle {
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+            display: block;
+        }
 
-    #advertencia p {
-      margin-bottom: 20px;
-    }
+        #menuItems {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            height: 100%;
+            background-color: #34495e;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            padding-top: 60px;
+            transition: 0.3s;
+        }
 
-    #advertencia input {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-      border: none;
-    }
+        #menuItems a {
+            padding: 15px;
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            border-bottom: 1px solid #2c3e50;
+            transition: background-color 0.3s ease;
+        }
 
-    #advertencia button {
-      background: #2c3e50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 18px;
-    }
+        #menuItems a:hover {
+            background-color: #e74c3c;
+        }
 
-    #advertencia button:hover {
-      background: #34495e;
-    }
+        /* Estilos del canvas (fondo con planetas) */
+        #canvas {
+            display: block;
+            margin-top: 100px;
+            width: 100%;
+            height: 600px;
+            background: #1b2a41;
+            transition: all 0.5s ease;
+        }
 
-    /* ----- Resto del diseño ----- */
-    header {
-      background-color: #c0392b;
-      color: white;
-      padding: 20px 60px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      z-index: 1000;
-    }
+        /* Estilo de la información de los planetas */
+        .planet-info {
+            display: none;
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            transition: opacity 0.5s ease;
+        }
 
-    .logo {
-      font-size: 36px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      text-align: center;
-      transition: opacity 0.5s ease;
-    }
+        /* Responsividad */
+        @media (max-width: 768px) {
+            #menu {
+                padding: 10px;
+            }
 
-    .hamburguesa {
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 30px;
-      height: 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
-    }
+            #titulo {
+                font-size: 24px;
+            }
 
-    .hamburguesa span {
-      height: 4px;
-      background: white;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
+            #menuItems {
+                width: 200px;
+            }
 
-    .activo .hamburguesa span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .activo .hamburguesa span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .activo .hamburguesa span:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    .menu-lateral {
-      position: fixed;
-      top: 80px;
-      left: -250px;
-      width: 250px;
-      height: calc(100% - 80px);
-      background-color: #2c3e50;
-      padding-top: 20px;
-      transition: left 0.4s ease;
-      z-index: 999;
-    }
-
-    .menu-lateral a {
-      display: block;
-      padding: 15px 20px;
-      color: white;
-      text-decoration: none;
-      border-bottom: 1px solid #34495e;
-    }
-
-    .menu-lateral a:hover {
-      background-color: #34495e;
-    }
-
-    .activo .menu-lateral {
-      left: 0;
-    }
-
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 998;
-      display: none;
-    }
-
-    .activo .overlay {
-      display: block;
-    }
-
-    .contenido {
-      padding: 40px;
-      display: none;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.5s ease;
-    }
-
-    .contenido.activo {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    #inicio {
-      background: url('https://images.unsplash.com/photo-1616707423181-69f86b3fcbcb') center/cover;
-      color: white;
-      min-height: 400px;
-    }
-
-    #planetas {
-      background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
-      color: white;
-      min-height: 400px;
-    }
-
-    #secretos {
-      background: black;
-      color: lime;
-      min-height: 400px;
-    }
-
-    #fundadores {
-      background: #7f8c8d;
-      color: white;
-      min-height: 400px;
-    }
-
-    #militar {
-      background: #2c3e50;
-      color: gold;
-      min-height: 400px;
-    }
-  </style>
+            #menuItems a {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<!-- Pantalla de advertencia -->
-<div id="advertencia">
-  <div class="contenedor">
-    <h1>¡PÁGINA CLASIFICADA!</h1>
-    <p>¡Precaución! Este es un sitio clasificado. Para continuar, por favor ingresa tu nombre:</p>
-    <input type="text" id="nombreInput" placeholder="Ingresa tu nombre...">
-    <button onclick="iniciar()">Aceptar</button>
-  </div>
-</div>
+    <!-- Cabecera con el menú -->
+    <div id="menu">
+        <div id="titulo">Alfa Centauri</div>
+        <div id="menuToggle" onclick="toggleMenu()">☰</div>
+    </div>
 
-<!-- Menú y Contenido -->
-<header>
-  <div class="hamburguesa" onclick="toggleMenu()">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <div class="logo" id="logo">AUGE</div>
-</header>
+    <!-- Menú Desplegable -->
+    <div id="menuItems">
+        <a href="#" onclick="mostrarPlaneta('proxima')">Proxima Centauri b</a>
+        <a href="#" onclick="mostrarPlaneta('centauriA')">Alfa Centauri A</a>
+        <a href="#" onclick="mostrarPlaneta('centauriB')">Alfa Centauri B</a>
+    </div>
 
-<div class="menu-lateral" id="menu">
-  <a href="#" onclick="mostrarSeccion('inicio')">Inicio</a>
-  <a href="#" onclick="mostrarSeccion('planetas')">Sistemas Solares</a>
-  <a href="#" onclick="mostrarSeccion('fundadores')">Fundadores</a>
-  <a href="#" onclick="mostrarSeccion('militar')">Categoría Militar</a>
-  <a href="#" onclick="mostrarSeccion('secretos')">Secretos</a>
-  <a href="alfacentauri.html"> ALFA CENTAURI</a>
-</div>
+    <!-- Canvas para mostrar los planetas -->
+    <canvas id="canvas"></canvas>
 
-<div class="overlay" onclick="toggleMenu()"></div>
+    <!-- Información de los planetas -->
+    <div id="proxima" class="planet-info">
+        <h2>Proxima Centauri b</h2>
+        <p>Es un exoplaneta situado en la zona habitable de la estrella Proxima Centauri, la más cercana al Sistema Solar.</p>
+    </div>
 
-<!-- Secciones -->
-<div class="contenido activo" id="inicio">
-  <h1>Bienvenido a AUGE</h1>
-  <p>Dominamos la energía. Controlamos los secretos. Reinventamos el futuro.</p>
-</div>
+    <div id="centauriA" class="planet-info">
+        <h2>Alfa Centauri A</h2>
+        <p>Es una de las estrellas más brillantes en el cielo, a unos 4.37 años luz de distancia de la Tierra.</p>
+    </div>
 
-<div class="contenido" id="planetas">
-  <h1>Sistemas Solares</h1>
-  <p>Colonias activas en Alfa Centauri, Vega y más. Energía infinita en manos humanas.</p>
-</div>
+    <div id="centauriB" class="planet-info">
+        <h2>Alfa Centauri B</h2>
+        <p>Es la segunda estrella en el sistema de Alfa Centauri, más pequeña y menos brillante que Alfa Centauri A.</p>
+    </div>
 
-<div class="contenido" id="fundadores">
-  <h1>Los Fundadores</h1>
-  <p>Ellos forjaron la visión. Científicos, estrategas y visionarios detrás del imperio AUGE.</p>
-</div>
+    <script>
+        // Función para desplegar/ocultar el menú
+        function toggleMenu() {
+            const menuItems = document.getElementById("menuItems");
+            if (menuItems.style.left === "0px") {
+                menuItems.style.left = "-250px"; // Ocultar el menú
+            } else {
+                menuItems.style.left = "0"; // Mostrar el menú
+            }
+        }
 
-<div class="contenido" id="militar">
-  <h1>Fuerza Militar</h1>
-  <p>Élite entrenada, mecas de combate y sistemas autónomos protegen el legado AUGE.</p>
-</div>
+        // Función para mostrar la información de los planetas
+        function mostrarPlaneta(planeta) {
+            const planetas = document.querySelectorAll('.planet-info');
+            planetas.forEach(function(planet) {
+                planet.style.display = 'none';
+                planet.style.opacity = '0';
+            });
 
-<div class="contenido" id="secretos">
-  <h1>Archivos Clasificados</h1>
-  <p>Acceso restringido. Información disponible solo para niveles superiores.</p>
-</div>
+            document.getElementById(planeta).style.display = 'block';
+            document.getElementById(planeta).style.opacity = '1';
 
-<script>
-  // Función para mostrar/ocultar el menú
-  function toggleMenu() {
-    document.body.classList.toggle('activo');
-  }
+            mostrarCanvas(planeta);
+        }
 
-  // Función para mostrar las secciones
-  function mostrarSeccion(id) {
-    // Cerrar menú
-    document.body.classList.remove('activo');
+        // Función para mostrar el canvas con el planeta seleccionado
+        function mostrarCanvas(planeta) {
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
 
-    // Ocultar todas
-    document.querySelectorAll('.contenido').forEach(s => {
-      s.classList.remove('activo');
-    });
+            // Limpiar el canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Mostrar sección actual
-    document.getElementById(id).classList.add('activo');
+            // Ajustar el color de fondo
+            ctx.fillStyle = "#1b2a41";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Mostrar u ocultar el logo principal
-    const logo = document.getElementById('logo');
-    if (id === 'inicio') {
-      logo.style.opacity = 1;
-    } else {
-      logo.style.opacity = 0;
-    }
-  }
-
-  // Función para mostrar el mensaje de bienvenida
-  function iniciar() {
-    const nombre = document.getElementById('nombreInput').value;
-    if (nombre) {
-      // Ocultar advertencia
-      document.getElementById('advertencia').style.opacity = 0;
-      setTimeout(() => {
-        document.getElementById('advertencia').style.display = 'none';
-        alert(`¡Bonito el cuadro! Gracias por confiar en nosotros, ${nombre}.`);
-      }, 1000);
-    } else {
-      alert('Por favor ingresa tu nombre.');
-    }
-  }
-</script>
+            // Mostrar planetas con su propia animación
+            if (planeta === 'proxima') {
+                ctx.fillStyle = "#e74c3c";
+                ctx.beginPath();
+                ctx.arc(canvas.width / 2, canvas.height / 2, 80, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (planeta === 'centauriA') {
+                ctx.fillStyle = "#f39c12";
+                ctx.beginPath();
+                ctx.arc(canvas.width / 2, canvas.height / 2, 100, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (planeta === 'centauriB') {
+                ctx.fillStyle = "#8e44ad";
+                ctx.beginPath();
+                ctx.arc(canvas.width / 2, canvas.height / 2, 60, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+    </script>
 
 </body>
 </html>
