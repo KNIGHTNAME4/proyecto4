@@ -4,122 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AUGE - Página Principal</title>
-    <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Estilos globales */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
+    <style>
+        /* Estilos globales */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-#canvas {
-    display: block;
-    margin-top: 20px;
-}
+        #canvas {
+            display: block;
+            margin-top: 20px;
+        }
 
-/* Estilos del menú */
-#menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #e74c3c;
-    width: 100%;
-    padding: 10px;
-    z-index: 1000;
-}
+        /* Estilos del menú */
+        #menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #e74c3c;
+            width: 100%;
+            padding: 10px;
+            z-index: 1000;
+        }
 
-.hamburger-menu {
-    font-size: 30px;
-    cursor: pointer;
-}
+        .hamburger-menu {
+            font-size: 30px;
+            cursor: pointer;
+        }
 
-.menu-items {
-    display: none;
-    text-align: center;
-}
+        .menu-items {
+            display: none;
+            text-align: center;
+        }
 
-.menu-items a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-}
+        .menu-items a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
 
-.menu-items a:hover {
-    background-color: #c0392b;
-}
+        .menu-items a:hover {
+            background-color: #c0392b;
+        }
 
-/* Estilo para las alertas */
-.alerta {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    color: white;
-    font-size: 18px;
-    text-align: center;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: all 0.5s ease;
-}
+        /* Estilo para las alertas */
+        .alerta {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.5s ease;
+        }
 
-.alerta .contenedor {
-    background: #e74c3c;
-    padding: 30px;
-    border-radius: 15px;
-    width: 80%;
-    max-width: 400px;
-}
+        .alerta .contenedor {
+            background: #e74c3c;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 400px;
+        }
 
-.alerta h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
+        .alerta h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-.alerta p {
-    margin-bottom: 20px;
-}
+        .alerta p {
+            margin-bottom: 20px;
+        }
 
-.alerta .contenedor p span {
-    font-weight: bold;
-    color: #f1c40f;
-}
+        .alerta .contenedor p span {
+            font-weight: bold;
+            color: #f1c40f;
+        }
 
-.alerta.show {
-    display: flex;
-    opacity: 1;
-    transform: scale(1);
-}
+        .alerta.show {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
 
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    .menu-items a {
-        font-size: 16px;
-    }
-    #canvas {
-        height: 300px;
-    }
-}
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .menu-items a {
+                font-size: 16px;
+            }
+            #canvas {
+                height: 300px;
+            }
+        }
 
-@media (max-width: 480px) {
-    .hamburger-menu {
-        font-size: 28px;
-    }
-    #canvas {
-        height: 200px;
-    }
-}
-
-  </style>
+        @media (max-width: 480px) {
+            .hamburger-menu {
+                font-size: 28px;
+            }
+            #canvas {
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -158,57 +156,56 @@ body, html {
     <!-- Canvas para contenido -->
     <canvas id="canvas" width="100%" height="500"></canvas>
 
-    <script src="script.js">
+    <script>
+        // Mostrar y ocultar el menú desplegable
+        function toggleMenu() {
+            const menuItems = document.getElementById("menuItems");
+            if (menuItems.style.display === "block") {
+                menuItems.style.display = "none";
+            } else {
+                menuItems.style.display = "block";
+            }
+        }
 
-      // Mostrar y ocultar el menú desplegable
-function toggleMenu() {
-    const menuItems = document.getElementById("menuItems");
-    if (menuItems.style.display === "block") {
-        menuItems.style.display = "none";
-    } else {
-        menuItems.style.display = "block";
-    }
-}
+        // Función para manejar la alerta de advertencia
+        function iniciar() {
+            const nombre = document.getElementById('nombreInput').value;
+            if (nombre) {
+                // Ocultar la advertencia
+                document.getElementById('advertencia').style.opacity = 0;
+                setTimeout(() => {
+                    document.getElementById('advertencia').style.display = 'none';
+                    // Mostrar la segunda alerta con el nombre
+                    document.getElementById('nombreUsuario').textContent = nombre;
+                    document.getElementById('alertaBienvenida').classList.add('show');
+                    
+                    // Ocultar la segunda alerta después de 3 segundos
+                    setTimeout(() => {
+                        document.getElementById('alertaBienvenida').classList.remove('show');
+                    }, 3000);
+                }, 1000);
+            } else {
+                alert('Por favor ingresa tu nombre.');
+            }
+        }
 
-// Función para manejar la alerta de advertencia
-function iniciar() {
-    const nombre = document.getElementById('nombreInput').value;
-    if (nombre) {
-        // Ocultar la advertencia
-        document.getElementById('advertencia').style.opacity = 0;
-        setTimeout(() => {
-            document.getElementById('advertencia').style.display = 'none';
-            // Mostrar la segunda alerta con el nombre
-            document.getElementById('nombreUsuario').textContent = nombre;
-            document.getElementById('alertaBienvenida').classList.add('show');
-            
-            // Ocultar la segunda alerta después de 3 segundos
-            setTimeout(() => {
-                document.getElementById('alertaBienvenida').classList.remove('show');
-            }, 3000);
-        }, 1000);
-    } else {
-        alert('Por favor ingresa tu nombre.');
-    }
-}
+        // Función para mostrar contenido basado en el menú
+        function mostrarContenido(opcion) {
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
 
-// Función para mostrar contenido basado en el menú
-function mostrarContenido(opcion) {
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+            // Limpiar el canvas antes de agregar nuevo contenido
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Limpiar el canvas antes de agregar nuevo contenido
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Cambiar el fondo dependiendo de la opción
+            ctx.fillStyle = "#3498db";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Cambiar el fondo dependiendo de la opción
-    ctx.fillStyle = "#3498db";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "white";
-    ctx.font = "30px Arial";
-    ctx.fillText(`Contenido: ${opcion}`, 50, 100);
-}
-
+            ctx.fillStyle = "white";
+            ctx.font = "30px Arial";
+            ctx.fillText(`Contenido: ${opcion}`, 50, 100);
+        }
     </script>
+
 </body>
 </html>
