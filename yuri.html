@@ -1,83 +1,113 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Menú Desplegable</title>
+  <meta charset="UTF-8">
+  <title>Menú Lateral Desplegable</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      font-family: sans-serif;
+      background: #f0f0f0;
     }
 
-    .menu {
-      position: relative;
-      display: inline-block;
-    }
-
-    .boton-menu {
-      background-color: #3498db;
-      color: white;
-      padding: 10px 20px;
-      border: none;
+    .hamburguesa {
+      width: 30px;
+      height: 22px;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       cursor: pointer;
-      border-radius: 5px;
+      position: relative;
+      z-index: 1001;
     }
 
-    .desplegable {
-      display: none;
-      position: absolute;
-      background-color: white;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-      border-radius: 5px;
-      z-index: 1;
+    .hamburguesa span {
+      height: 4px;
+      background: #333;
+      border-radius: 2px;
+      transition: all 0.3s ease;
     }
 
-    .desplegable a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
+    .menu-lateral {
+      position: fixed;
+      top: 0;
+      left: -250px; /* Oculto */
+      width: 250px;
+      height: 100%;
+      background-color: #2c3e50;
+      padding-top: 60px;
+      transition: left 0.4s ease;
+      z-index: 1000;
+    }
+
+    .menu-lateral a {
       display: block;
+      padding: 15px 20px;
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid #34495e;
     }
 
-    .desplegable a:hover {
-      background-color: #f1f1f1;
+    .menu-lateral a:hover {
+      background-color: #34495e;
     }
 
-    .mostrar {
+    .activo .menu-lateral {
+      left: 0;
+    }
+
+    /* Animación del botón hamburguesa al abrir */
+    .activo .hamburguesa span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .activo .hamburguesa span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .activo .hamburguesa span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 999;
+      display: none;
+    }
+
+    .activo .overlay {
       display: block;
     }
   </style>
 </head>
 <body>
 
-<div class="menu">
-  <button class="boton-menu" onclick="toggleMenu()">Menú</button>
-  <div class="desplegable" id="miMenu">
-    <a href="#">Opción 1</a>
-    <a href="#">Opción 2</a>
-    <a href="#">Opción 3</a>
-  </div>
+<div class="hamburguesa" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
 </div>
+
+<div class="menu-lateral" id="menu">
+  <a href="#">Inicio</a>
+  <a href="#">Acerca de</a>
+  <a href="#">Servicios</a>
+  <a href="#">Contacto</a>
+</div>
+
+<div class="overlay" onclick="toggleMenu()"></div>
 
 <script>
   function toggleMenu() {
-    document.getElementById("miMenu").classList.toggle("mostrar");
-  }
-
-  // Cerrar el menú si se hace clic fuera de él
-  window.onclick = function(event) {
-    if (!event.target.matches('.boton-menu')) {
-      let dropdowns = document.getElementsByClassName("desplegable");
-      for (let i = 0; i < dropdowns.length; i++) {
-        let openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('mostrar')) {
-          openDropdown.classList.remove('mostrar');
-        }
-      }
-    }
+    document.body.classList.toggle('activo');
   }
 </script>
 
 </body>
 </html>
-
