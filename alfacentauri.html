@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploración Alfa Centauri</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        #menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #2c3e50;
+            width: 100%;
+            padding: 10px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #menu .hamburger {
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .menu-items {
+            display: none;
+            flex-direction: column;
+            background-color: #34495e;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+        }
+
+        .menu-items a {
+            padding: 15px;
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .menu-items a:hover {
+            background-color: #e74c3c;
+        }
+
+        #canvas {
+            display: block;
+            margin-top: 60px;
+            width: 100%;
+            height: 600px;
+            background: #1b2a41;
+        }
+
+        .planet-info {
+            display: none;
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #menu {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .menu-items a {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menu desplegable -->
+    <div id="menu">
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <div id="menuItems" class="menu-items">
+            <a href="#" onclick="mostrarPlaneta('proxima')">Proxima Centauri b</a>
+            <a href="#" onclick="mostrarPlaneta('centauriA')">Alfa Centauri A</a>
+            <a href="#" onclick="mostrarPlaneta('centauriB')">Alfa Centauri B</a>
+        </div>
+    </div>
+
+    <!-- Canvas para mostrar los planetas -->
+    <canvas id="canvas"></canvas>
+
+    <!-- Información de los planetas -->
+    <div id="proxima" class="planet-info">
+        <h2>Proxima Centauri b</h2>
+        <p>Es un exoplaneta situado en la zona habitable de la estrella Proxima Centauri, la más cercana al Sistema Solar.</p>
+    </div>
+
+    <div id="centauriA" class="planet-info">
+        <h2>Alfa Centauri A</h2>
+        <p>Es una de las estrellas más brillantes en el cielo, a unos 4.37 años luz de distancia de la Tierra.</p>
+    </div>
+
+    <div id="centauriB" class="planet-info">
+        <h2>Alfa Centauri B</h2>
+        <p>Es la segunda estrella en el sistema de Alfa Centauri, más pequeña y menos brillante que Alfa Centauri A.</p>
+    </div>
+
+    <script>
+        // Mostrar y ocultar el menú desplegable
+        function toggleMenu() {
+            const menuItems = document.getElementById("menuItems");
+            if (menuItems.style.display === "block") {
+                menuItems.style.display = "none";
+            } else {
+                menuItems.style.display = "block";
+            }
+        }
+
+        // Mostrar información del planeta
+        function mostrarPlaneta(planeta) {
+            const planetas = document.querySelectorAll('.planet-info');
+            planetas.forEach(function(planet) {
+                planet.style.display = 'none';
+            });
+
+            document.getElementById(planeta).style.display = 'block';
+            mostrarCanvas(planeta);
+        }
+
+        // Mostrar canvas y cambiar contenido
+        function mostrarCanvas(planeta) {
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+
+            // Limpiar el canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Ajustar el color de fondo
+            ctx.fillStyle = "#1b2a41";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Mostrar planetas con su propia animación
+            if (planeta === 'proxima') {
+                ctx.fillStyle = "#e74c3c";
+                ctx.beginPath();
+                ctx.arc(canvas.width / 2, canvas.height / 2, 80, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (planeta === 'centauriA') {
+                ctx.fillStyle = "#f39c12";
+                ctx.beginPath();
+                ctx.arc(canvas.width / 2, canvas.height / 2, 100, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (planeta === 'centauriB') {
+                ctx.fillStyle = "#8e44ad";
+                ctx.beginPath();
+                ctx.arc(canvas.width / 2, canvas.height / 2, 60, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+    </script>
+
+</body>
+</html>
