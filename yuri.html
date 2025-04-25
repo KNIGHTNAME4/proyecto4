@@ -4,8 +4,13 @@
   <meta charset="UTF-8">
   <title>AUGE - Poder y Futuro</title>
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Segoe UI', sans-serif;
       background: #f4f4f4;
     }
@@ -14,55 +19,38 @@
     header {
       background-color: #c0392b;
       color: white;
-      padding: 20px;
+      padding: 20px 60px 20px 60px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       position: relative;
-      z-index: 1001;
+      z-index: 1000;
     }
 
     .logo {
-      font-size: 28px;
+      font-size: 36px;
       font-weight: bold;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      text-align: center;
     }
 
-    nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    nav a:hover,
-    nav a.menu-seleccionado {
-      color: #ecf0f1;
-      border-bottom: 2px solid white;
-    }
-
-    /* ----- Menú hamburguesa ----- */
+    /* ----- Botón hamburguesa en header ----- */
     .hamburguesa {
-      position: fixed;
-      top: 20px;
+      position: absolute;
       left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
       width: 30px;
       height: 22px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       cursor: pointer;
-      z-index: 1002;
     }
 
     .hamburguesa span {
       height: 4px;
-      background: #333;
+      background: white;
       border-radius: 2px;
       transition: all 0.3s ease;
     }
@@ -82,14 +70,14 @@
     /* ----- Menú lateral desplegable ----- */
     .menu-lateral {
       position: fixed;
-      top: 0;
+      top: 80px; /* Justo debajo del header */
       left: -250px;
       width: 250px;
-      height: 100%;
+      height: calc(100% - 80px);
       background-color: #2c3e50;
-      padding-top: 60px;
+      padding-top: 20px;
       transition: left 0.4s ease;
-      z-index: 1000;
+      z-index: 999;
     }
 
     .menu-lateral a {
@@ -115,12 +103,35 @@
       width: 100vw;
       height: 100vh;
       background: rgba(0, 0, 0, 0.4);
-      z-index: 999;
+      z-index: 998;
       display: none;
     }
 
     .activo .overlay {
       display: block;
+    }
+
+    /* ----- Navegación interna ----- */
+    nav {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background-color: #b23527;
+      padding: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover,
+    nav a.menu-seleccionado {
+      color: #ecf0f1;
+      border-bottom: 2px solid white;
     }
 
     /* ----- Contenido dinámico ----- */
@@ -138,19 +149,21 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
   </style>
 </head>
 <body>
 
-<!-- Menú Hamburguesa -->
-<div class="hamburguesa" onclick="toggleMenu()">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+<!-- Header y botón hamburguesa en la misma barra -->
+<header>
+  <div class="hamburguesa" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="logo">AUGE</div>
+</header>
 
-<!-- Menú Lateral Desplegable -->
+<!-- Menú Lateral -->
 <div class="menu-lateral" id="menu">
   <a href="#">Inicio</a>
   <a href="#">Información de la Empresa</a>
@@ -163,18 +176,15 @@
 
 <div class="overlay" onclick="toggleMenu()"></div>
 
-<!-- Encabezado Principal -->
-<header>
-  <div class="logo">AUGE</div>
-  <nav>
-    <a href="#" onclick="mostrarSeccion('nosotros', this)">Nosotros</a>
-    <a href="#" onclick="mostrarSeccion('recursos', this)">Recursos</a>
-    <a href="#" onclick="mostrarSeccion('productos', this)">Productos</a>
-    <a href="#" onclick="mostrarSeccion('ahora', this)">Ahora</a>
-  </nav>
-</header>
+<!-- Navegación de secciones dinámicas -->
+<nav>
+  <a href="#" onclick="mostrarSeccion('nosotros', this)">Nosotros</a>
+  <a href="#" onclick="mostrarSeccion('recursos', this)">Recursos</a>
+  <a href="#" onclick="mostrarSeccion('productos', this)">Productos</a>
+  <a href="#" onclick="mostrarSeccion('ahora', this)">Ahora</a>
+</nav>
 
-<!-- Contenido Dinámico -->
+<!-- Contenido dinámico -->
 <div class="contenido" id="nosotros">
   <h2>¿Quiénes somos?</h2>
   <p>AUGE es una corporación de élite, impulsando el futuro con poder, tecnología y visión imparable.</p>
@@ -195,7 +205,7 @@
   <p>AUGE está activando el Proyecto Fénix. Prepárate para el próximo salto de la humanidad.</p>
 </div>
 
-<!-- Scripts -->
+<!-- Script -->
 <script>
   function toggleMenu() {
     document.body.classList.toggle('activo');
@@ -214,4 +224,3 @@
 
 </body>
 </html>
-
