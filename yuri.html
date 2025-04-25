@@ -1,19 +1,83 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Pagina de yuri</title>
-<link rel="stylesheet" href="estilo2.css" >
-	</head>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menú Desplegable</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
 
-	<header>   
-	<h1> BANCO YURY </h1>
-		<h2> BANCO EXTRAÑO </h2>
-	</header>
-	<body>
-		
-	 <p>  holab bienvenido</p>
+    .menu {
+      position: relative;
+      display: inline-block;
+    }
 
-		
+    .boton-menu {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
 
-	</body>
+    .desplegable {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      z-index: 1;
+    }
+
+    .desplegable a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .desplegable a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .mostrar {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<div class="menu">
+  <button class="boton-menu" onclick="toggleMenu()">Menú</button>
+  <div class="desplegable" id="miMenu">
+    <a href="#">Opción 1</a>
+    <a href="#">Opción 2</a>
+    <a href="#">Opción 3</a>
+  </div>
+</div>
+
+<script>
+  function toggleMenu() {
+    document.getElementById("miMenu").classList.toggle("mostrar");
+  }
+
+  // Cerrar el menú si se hace clic fuera de él
+  window.onclick = function(event) {
+    if (!event.target.matches('.boton-menu')) {
+      let dropdowns = document.getElementsByClassName("desplegable");
+      for (let i = 0; i < dropdowns.length; i++) {
+        let openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('mostrar')) {
+          openDropdown.classList.remove('mostrar');
+        }
+      }
+    }
+  }
+</script>
+
+</body>
 </html>
+
