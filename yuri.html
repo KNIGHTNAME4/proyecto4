@@ -282,7 +282,7 @@
      border: none;
      transition: width 1s;
     } 
-   #buscar-person:active{
+   #buscar-person.expandido{
        width:300px;
       border: none;
    }
@@ -425,7 +425,7 @@ los posee desde dentro, como un virus que se confunde con su huésped. Su lema r
   <p>Acceso restringido. Información disponible solo para niveles superiores.</p>
 </div>
 
-<script>
+<script> 
   // Función para mostrar/ocultar el menú
   function toggleMenu() {
     document.body.classList.toggle('activo');
@@ -452,6 +452,26 @@ los posee desde dentro, como un virus que se confunde con su huésped. Su lema r
       logo.style.opacity = 0;
     }
   }
+ 
+
+ 
+const botonBuscar = document.getElementById('buscar-person');
+
+botonBuscar.addEventListener('click', (e) => {
+  e.stopPropagation(); // Para que no cierre de inmediato
+  botonBuscar.classList.add('expandido'); // Agrega la clase para que crezca
+});
+
+// Si haces click en cualquier otro lado, se contrae
+document.addEventListener('click', () => {
+  botonBuscar.classList.remove('expandido');
+});
+
+
+
+
+
+ 
 
   // Función para mostrar el mensaje de bienvenida
   function iniciar() {
