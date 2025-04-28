@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apogeo</title>
+  <style>
+    /* --- ESTILOS GENERALES --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /* --- HEADER --- */
+    header {
+      background: linear-gradient(to right, #2980b9, #3498db);
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .logo img {
+      width: 40px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .buscar {
+      background: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+    }
+
+    /* --- HERO PRINCIPAL --- */
+    .hero {
+      background: linear-gradient(to right, #3498db, #2980b9);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .boton {
+      background: white;
+      color: #3498db;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .boton:hover {
+      background: #ecf0f1;
+    }
+
+    /* --- CONTENIDO --- */
+    .contenido {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .contenido h2 {
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    .contenido p {
+      max-width: 600px;
+      margin: auto;
+      color: #7f8c8d;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        margin-top: 10px;
+      }
+      .hero h1 {
+        font-size: 28px;
+      }
+      .hero p {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- --- HEADER --- -->
+<header>
+  <div class="logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Globe_icon.svg/120px-Globe_icon.svg.png" alt="Apogeo">
+    Apogeo
+  </div>
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#">Características</a>
+    <a href="#">Documentación</a>
+    <a href="#">Contacto</a>
+  </nav>
+  <input type="text" placeholder="Buscar..." class="buscar">
+</header>
+
+<!-- --- HERO PRINCIPAL --- -->
+<section class="hero">
+  <h1>Un framework.</h1>
+  <p>Móvil, escritorio y más allá.</p>
+  <a href="#" class="boton">EMPEZAR</a>
+</section>
+
+<!-- --- CONTENIDO PRINCIPAL --- -->
+<section class="contenido">
+  <h2>Desarrolla en todas las plataformas</h2>
+  <p>Con Apogeo puedes crear aplicaciones modernas, adaptables y potentes, reutilizando tu código y habilidades en todo tipo de dispositivos.</p>
+</section>
+
+</body>
+</html>
